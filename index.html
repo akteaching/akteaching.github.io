@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Grade Calculator</title>
+</head>
+<body>
+
+  <label for="score">Score:</label>
+  <input type="range" id="score" name="score" min="0" max="100" value="0">
+  <span id="scoreValue">0</span>
+  <br><br>
+
+  <label for="total">Total Possible Score:</label>
+  <input type="number" id="total" name="total" value="100">
+  <br><br>
+
+  <button onclick="calculateGrade()">Calculate Grade</button>
+  <br><br>
+
+  <p>Grade: <span id="grade"></span></p>
+    <input type="number" id="num1" placeholder="Number 1">
+    <input type="number" id="num2" placeholder="Number 2">
+	<p>
+    Grade: <div id="sum"></div>
+  <script>
+    const scoreSlider = document.getElementById("score");
+    const scoreValueSpan = document.getElementById("scoreValue");
+
+    scoreSlider.addEventListener("input", function() {
+      scoreValueSpan.textContent = scoreSlider.value;
+    });
+    
+    function calculateGrade() {
+      let score = parseInt(document.getElementById("score").value);
+      let total = parseInt(document.getElementById("total").value);
+
+      if (isNaN(score) || isNaN(total) || total <= 0) {
+        document.getElementById("grade").textContent = "Invalid input";
+        return;
+      }
+
+      let percentage = (score / total) * 100;
+      let letterGrade;
+
+      if (percentage >= 90) {
+        letterGrade = "A";
+      } else if (percentage >= 80) {
+        letterGrade = "B";
+      } else if (percentage >= 70) {
+        letterGrade = "C";
+      } else if (percentage >= 60) {
+        letterGrade = "D";
+      } else {
+        letterGrade = "F";
+      }
+
+      document.getElementById("grade").textContent = letterGrade;
+    }
+  
+    const num1 = document.getElementById('num1');
+    const num2 = document.getElementById('num2');
+    const sumDisplay = document.getElementById('sum');
+
+    num1.addEventListener('input', calculateSum);
+    num2.addEventListener('input', calculateSum);
+
+    function calculateSum() {
+      const value1 = parseFloat(num1.value) || 0;
+      const value2 = parseFloat(num2.value) || 0;
+      sumDisplay.textContent = value1 + value2;
+    }
+  </script>
+  
+
+</body>
+</html>
